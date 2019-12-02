@@ -1,6 +1,2 @@
-require "vehicle_rankings/version"
-
-module VehicleRankings
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./vehicle_rankings/version"
+require_relative "./vehicle_rankings/cli"
