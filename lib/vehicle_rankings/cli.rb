@@ -9,13 +9,7 @@ class VehicleRankings::CLI
   
   # desired settup for list of vehicles 
   def list_models
-      puts <<-Doc.gsub /^\s*/, '' 
-         1. SUV
-         2. Sedan 
-         3. Couple 
-         4. Van
-         5. Truck
-        Doc
+     @ranks = VehicleRankings::Ranks
   end 
   
   def models
@@ -24,6 +18,7 @@ class VehicleRankings::CLI
      input = nil
     while input != "exit"
       input = gets.strip.downcase 
+      # if input >= "1" || input <= "5" || input == "list" || input == "exit"
         case input
           when "1"
             puts "You selected SUV"
@@ -38,6 +33,10 @@ class VehicleRankings::CLI
           when "list"
             list_models
           end 
+        # else 
+        #   # change between 1 to 5 to 1 to list_models 
+        #   puts "invaild please type list, exit, or between 1, 5"
+        # end 
           
      end 
    def close 
