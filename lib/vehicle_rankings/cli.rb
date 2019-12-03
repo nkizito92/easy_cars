@@ -18,31 +18,28 @@ class VehicleRankings::CLI
      input = nil
     while input != "exit"
       input = gets.strip.downcase 
-      # if input >= "1" || input <= "5" || input == "list" || input == "exit"
-        case input
-          when "1"
-            puts "You selected SUV"
-          when "2"
-            puts "You selected Sedan"
-          when "3"
-            puts "You selected Couple"
-          when "4"
-            puts "You selected Van"
-          when "5"
-            puts "You selected Truck"
-          when "list"
-            list_models
-          end 
-        # else 
-        #   # change between 1 to 5 to 1 to list_models 
-        #   puts "invaild please type list, exit, or between 1, 5"
-        # end 
-          
-     end 
-   def close 
-     puts "closing search!!"
-   end 
+      case input
+      when "1"
+        puts "You selected SUV"
+      when "2"
+        puts "You selected Sedan"
+      when "3"
+        puts "You selected Couple"
+      when "4"
+        puts "You selected Van"
+      when "5"
+        puts "You selected Truck"
+      when "list"
+        list_models
+      when "exit" 
+      else
+        # change between 1 to 5 to (1 through list_models) 
+        puts "Invaild please type list, exit, or between 1, 5"
+      end 
+    end  
   end 
-  
-  
+  def close 
+     puts "closing search!!"
+  end  
+
 end 
