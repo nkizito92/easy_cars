@@ -9,7 +9,8 @@ class VehicleRankings::CLI
   
   # desired settup for list of vehicles 
   def list_models
-     @ranks = VehicleRankings::Ranks
+     @models = VehicleRankings::Model.models
+     @models.each.with_index(1) {|model, index| puts "#{index}. #{model.name} - #{model.price} #{model.rate}" } 
   end 
   
   def models
@@ -18,8 +19,10 @@ class VehicleRankings::CLI
      input = nil
     while input != "exit"
       input = gets.strip.downcase 
-      case input
+      case input 
+        #  when "input" 
       when "1"
+        # puts "you selected #{model.name}"
         puts "You selected SUV"
       when "2"
         puts "You selected Sedan"
@@ -34,7 +37,7 @@ class VehicleRankings::CLI
       when "exit" 
       else
         # change between 1 to 5 to (1 through list_models) 
-        puts "Invaild please type list, exit, or between 1, 5"
+        puts " #{input} is invaild please type list, exit, or a number between 1, #{@models.length}"
       end 
     end  
   end 

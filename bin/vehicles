@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-
-require '../lib/vehicle_rankings'
+# require "bundler/setup"
+require './lib/vehicle_rankings'
 VehicleRankings::CLI.new.call
