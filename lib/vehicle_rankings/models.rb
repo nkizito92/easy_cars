@@ -1,22 +1,20 @@
 class VehicleRankings::Model 
   
-  attr_accessor :name, :price, :url, :rate 
+  attr_accessor :name, :price, :year, :url, :rate 
   
+
   def self.models 
-    # puts <<-Doc.gsub /^\s*/, '' 
-    # 1. SUV
-    # 2. Sedan 
-    # 3. Couple 
-    # 4. Van
-    # 5. Truck
-    # Doc
-    
-    model = self.new 
-    model.name = "Suv"
-    model.price = "$199"
-    model.rate = "3 stars"
-    model.url = "https://www.cars.com/"
-    [model]
+    self.scrape_models
   end
+
+  def self.scrape_models 
+    models = []
+    models << self.scrape_site
+  end 
+
+  def self.scrape_site
+    doc = Nokogiri::HTML(open("https://www.cars.com/"))
+    binding.pry
+  end 
   
 end 

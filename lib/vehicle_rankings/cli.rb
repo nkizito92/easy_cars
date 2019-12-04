@@ -1,7 +1,6 @@
 # CLI controller 
 class VehicleRankings::CLI
   def call 
-    puts "HI what is up"
     list_models
     models
     close
@@ -9,8 +8,8 @@ class VehicleRankings::CLI
   
   # desired settup for list of vehicles 
   def list_models
-     @models = VehicleRankings::Model.models
-     @models.each.with_index(1) {|model, index| puts "#{index}. #{model.name} - #{model.price} #{model.rate}" } 
+     @models = VehicleRankings::Model.scrape_site
+     @models.each.with_index(1) {|model, index| puts "#{index}. #{model.year} #{model.name} - #{model.price} #{model.rate} #{model.url}" } 
   end 
   
   def models
