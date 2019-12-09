@@ -1,21 +1,4 @@
 #!/usr/bin/env ruby
 # require "bundler/setup"
 require './lib/vehicle_rankings'
-
-# truck = Car.new
-# truck.name = "CAR1"
-# truck.price = "$120938"
-# truck.url = "truck.com"
-# car = Car.new
-# car.name = "Other"
-# car.price = "$99"
-# car1.url = "car.com"
-# truck2 = Car.new
-# truck2.name = "truck2"
-# truck2.price = "$8"
-# truck2.url = "truck2.com"
-# car2 = Car.new
-# car2.name = "Other_car"
-# car2.price = "$99000000"
-# car2.url = "car2.com"
 VehicleRankings::CLI.new.call
