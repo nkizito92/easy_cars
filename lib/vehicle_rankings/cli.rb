@@ -37,11 +37,10 @@ class VehicleRankings::CLI
       elsif input == "exit"
         # do nothing
       elsif input.to_i > 0 && input.to_i <= Car.all.length
-        binding.pry
-        puts "\nYou selected #{Car.all[(input.to_i)-1]}"
-        [(input.to_i)-1]
-        list_makes
-        makes
+        puts "\nYou selected #{Car.all[(input.to_i)-1].name}"
+        
+        # list_makes
+        # makes
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 

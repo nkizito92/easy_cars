@@ -39,7 +39,7 @@ class Car
         @@all << self 
     end
 
-    def self.print_all
+    def self.create
         i = 0
         vehi = Scraper.scrape_vehicles[:car_nodes]
         cost = Scraper.scrape_vehicles[:price_nodes]
@@ -48,11 +48,13 @@ class Car
             car = self.new 
             car.name = vehi[i]
             car.price = cost[i]
+            car.url = site[i]
             i+=1
+            binding.pry
         end 
-        car.url = site 
-        self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}- #{car.price}"} 
-        puts "\nVist the website #{car.url}"
+        # car.url = site 
+        # self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}- #{car.price}"} 
+        # puts "\nVist the website #{car.url}"
         
         # self.all.each {|car| puts "#{car.name} - #{car.price}"}
         # self.all.sort_by {|car| car.price.length}
