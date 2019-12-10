@@ -1,7 +1,7 @@
 # CLI controller 
-require "launchy"
-class VehicleRankings::CLI
+class VehicleRankings::CLI 
   def call 
+    Car.create
     list_cars
     models
     close
@@ -9,29 +9,35 @@ class VehicleRankings::CLI
   
   # desired setup for list of vehicles 
   def list_cars
-    # vehicles = VehicleRankings::Scraper.scrape_vehicles.each {|car, price| puts "#{car[:car_nodes]}"}
     Car.print_all
   end 
 
   def models
     # check the input if valid 
-    puts "\nEnter the number for the vehicle 'body' or type 'list' to see list of bodies or type 'exit' to quit"
+    puts "\nEnter the number to pick the desired vehicle or type 'exit' to quit"
+    puts "\nTo see the cheapest car type 'cheap'."
      input = nil
-    #  This is not quite there yet
     while input != "exit"
-      input = gets.strip.downcase
-      if input == "list"
+      input = gets.strip.downcase 
+      if input == "list" || input == "no"
         list_cars
       elsif input == "cars" 
-        Car.all
+        Car.print_cars
+      elsif input == "cheap"
+         takes_input = 2
+        Car.cheapest 
+        puts "\nWould you like to see this cars details? Type 'yes' or 'no' to continue"
       elsif input == "exit"
         # do nothing
       elsif input.to_i > 0 && input.to_i <= Car.all.length
-        puts "\nYou selected #{Car.all[(input.to_i)-1].name}"
-        puts "\nView this vehicles details type 'details'"
-      elsif input == "details"
-        link = "https://www.enterprisecarsales.com#{Car.all[(input.to_i)-1].url}"
-        Launchy.open("#{link}")
+        takes_input = input.to_i
+        user_input = Car.all[(takes_input)-1]
+        puts "\nYou selected #{user_input.name}"
+        puts "\nIt cost $#{user_input.price}"
+        puts "\nWould you like to view this selected vehicle's details? Type 'yes' or 'no' to continue"
+      elsif input == "yes"
+        link = "https://www.enterprisecarsales.com#{Car.all[(takes_input)-1].url}"
+        puts "#{link}"
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 
@@ -39,7 +45,8 @@ class VehicleRankings::CLI
   end 
   
   def close 
-    puts "closed search!!"
+    puts "closing search..."
+    sleep(2)
   end   
     
 end 
