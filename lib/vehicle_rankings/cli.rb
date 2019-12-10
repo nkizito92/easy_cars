@@ -1,15 +1,6 @@
 # CLI controller 
+require "launchy"
 class VehicleRankings::CLI
-  attr_accessor :body, :make, :vehicle_set
-  @@all = []
-  @@makers = []
-
-  def initialize 
-    # @vehicle_set = []
-    @body = body
-    @make = make
-  end 
-
   def call 
     list_cars
     models
@@ -32,53 +23,23 @@ class VehicleRankings::CLI
       if input == "list"
         list_cars
       elsif input == "cars" 
-        list_makes
-        makes 
+        Car.all
       elsif input == "exit"
         # do nothing
       elsif input.to_i > 0 && input.to_i <= Car.all.length
         puts "\nYou selected #{Car.all[(input.to_i)-1].name}"
-        
-        # list_makes
-        # makes
+        puts "\nView this vehicles details type 'details'"
+      elsif input == "details"
+        link = "https://www.enterprisecarsales.com#{Car.all[(input.to_i)-1].url}"
+        Launchy.open("#{link}")
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 
     end  
   end 
-
-  def makes 
-    puts "\nType the 'number' listed for Make or type 'done', 'list', or 'cars' to select Make or done;\nShow listed category or Make again."
-    input2 = nil
-   #  This is not quite there yet
-   while input2 != "done"
-    input2 = gets.strip.downcase
-    if input2 == "list"
-      list_category
-    elsif input2 == "cars" 
-      list_makes
-      makes 
-    elsif input2.to_i > 0 && input2.to_i <= @@makers.length
-      puts "\nYou selected #{@@makers[(input2.to_i)-1]}"
-      @make = @@makers[(input2.to_i)-1]
-      puts "You selected the body type '#{@body}' and Make '#{@make}' type 'results' to show see price and ratings"
-    elsif input2 == "done"
-      # do nothing
-    elsif input2 == "results"
-      results
-    else 
-      puts " #{input2} is invalid please type 'list', 'exit', or a number between 1-#{@@makers.length}!"
-    end 
-    end
-  end 
-
+  
   def close 
-     puts "closed search!!"
-  end  
-  def results 
-     # visits the class and checks body type and Make of the car selected 
-     # display prices and the ratings  
-    Cars.all.select {|car|  } 
-  end  
-
+    puts "closed search!!"
+  end   
+    
 end 

@@ -50,7 +50,6 @@ class Car
             car.price = cost[i]
             car.url = site[i]
             i+=1
-            binding.pry
         end 
         # car.url = site 
         # self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}- #{car.price}"} 
@@ -61,6 +60,10 @@ class Car
         # binding.pry
     end
 
+    def self.print_all
+        create
+        self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}- #{car.price}"} 
+    end 
     # def self.sort_by_price 
     #     cars.all.sort_by {|car| car.price.length}
     #     puts "#{cars}"
