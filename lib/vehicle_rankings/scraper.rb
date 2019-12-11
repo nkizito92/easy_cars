@@ -8,7 +8,36 @@ class Scraper
         scraped_car_info[:price_nodes] = price
         scraped_car_info[:car_nodes] = name 
         scraped_car_info[:url_nodes] = url 
+        # i = 0
+        # while i != scraped_car_info[:car_nodes].length
+        #     Car.new(hash[:car_nodes][i], hash[:price_nodes][i].to_i, hash[:url_nodes][i])
+        #     i+=1
+        # end 
         scraped_car_info
+    end 
+
+    def self.details(car_obj)
+        site = "https://www.enterprisecarsales.com"
+        doc = Nokogiri::HTML(open(site+car_obj.url))
+        node = doc.xpath("//div[@class='pv1']")
+        colors = doc.xpath("//div[@class='truncate pv1']")
+        car_obj.mileage = node[0].text 
+        car_obj.mpg = doc.xpath("//div[@class='trigger pv1']").text 
+        car_obj.ext_color = colors[0].text 
+        car_obj.int_color = colors[1].text  
+        car_obj.fuel_type = node[1].text 
+        car_obj.engine = node[2].text 
+        car_obj.drivetrain = node[3].text 
+        car_obj.location = node.last.text 
+        #  car_obj(mileage, mpg, ext_color, int_color, fuel_type, engine, drivetrain, location)
+        # car_info = [mileage, mpg, ext_color, int_color, fuel_type, engine, drivetrain, location]
+        #   car_info.delete_at(3) if mpg == ""
+         car_obj.mpg.delete if car_obj.mpg == ""
+        car_obj      
+    end 
+
+    def self.site 
+        "https://www.enterprisecarsales.com"
     end 
 
 end 

@@ -9,12 +9,15 @@ class VehicleRankings::CLI
   
   # desired setup for list of vehicles 
   def list_cars
+    puts "==================================================================="
     Car.print_all
+    puts "==================================================================="
   end 
 
   def models
     # check the input if valid 
-    puts "\nEnter the number to pick the desired vehicle or type 'exit' to quit"
+    puts "\nEnter a number and press 'enter' to pick the desired vehicle." 
+    puts "Type 'exit' to quit."
     puts "\nTo see the cheapest car type 'cheap'."
      input = nil
     while input != "exit"
@@ -25,19 +28,42 @@ class VehicleRankings::CLI
         Car.print_cars
       elsif input == "cheap"
          takes_input = 2
-        Car.cheapest 
-        puts "\nWould you like to see this cars details? Type 'yes' or 'no' to continue"
+        cheap = Car.cheapest 
+        puts "==================================================================="
+        puts "#{cheap.name} - $#{cheap.price}"
+        puts "==================================================================="
+        puts "\nWould you like to see this cars details? Type 'yes' and press 'enter'."
+        puts "Type 'no' and press 'enter' to continue."
       elsif input == "exit"
         # do nothing
       elsif input.to_i > 0 && input.to_i <= Car.all.length
         takes_input = input.to_i
         user_input = Car.all[(takes_input)-1]
-        puts "\nYou selected #{user_input.name}"
+        puts "==================================================================="
+        puts "You selected #{user_input.name}"
         puts "\nIt cost $#{user_input.price}"
-        puts "\nWould you like to view this selected vehicle's details? Type 'yes' or 'no' to continue"
+        puts "==================================================================="
+        puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
+        puts "Type 'no' and press 'enter' to continue.\n"
       elsif input == "yes"
-        link = "https://www.enterprisecarsales.com#{Car.all[(takes_input)-1].url}"
-        puts "#{link}"
+       Scraper.details(user_input)
+       puts "==================================================================="
+       puts "#{user_input.name} cost $#{user_input.price}"
+       puts "#{user_input.mileage}"
+       puts "#{user_input.mpg}" if user_input.mpg != ""
+       puts "#{user_input.ext_color}"
+       puts "#{user_input.int_color}"
+       puts "#{user_input.fuel_type}"
+       puts "#{user_input.engine}"
+       puts "#{user_input.drivetrain}"
+       puts "==================================================================="
+       puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
+      elsif input == "link"
+       puts "Hold ctrl/command and click the link below."
+       puts "==================================================================="
+       puts "#{Scraper.site+user_input.url}"
+       puts "==================================================================="
+       puts "\nType 'list' and press 'enter' to see a list of vehicles again."
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 

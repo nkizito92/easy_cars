@@ -1,11 +1,23 @@
 class Car
-    attr_accessor :name, :price, :url
+    attr_accessor :name, :price, :url, :mileage, :mpg, :ext_color, :int_color, :fuel_type, :engine, :drivetrain, :location
 
     @@all = []
 
-    def initialize
+    def initialize(name, price, url, mileage="nil", mpg="nil", ext_color="nil", int_color="nil", fuel_type="nil", engine="nil", drivetrain="nil", location="nil")
+        @name = name
+        @price = price
+        @url = url
+        
+        @mileage = mileage
+        @mpg = mpg
+        @ext_color = ext_color
+        @int_color = int_color
+        @fuel_type = fuel_type 
+        @engine = engine
+        @drivetrain = drivetrain
+        @location = location
         @@all << self
-    end 
+    end  
 
     def self.all
         @@all 
@@ -13,14 +25,9 @@ class Car
 
     def self.create
         i = 0
-        vehi = Scraper.scrape_vehicles[:car_nodes]
-        cost = Scraper.scrape_vehicles[:price_nodes]
-        site = Scraper.scrape_vehicles[:url_nodes]
-        while i != vehi.length
-            car = self.new 
-            car.name = vehi[i]
-            car.price = cost[i].to_i
-            car.url = site[i]
+        hash = Scraper.scrape_vehicles
+        while i != hash[:car_nodes].length
+            self.new(hash[:car_nodes][i], hash[:price_nodes][i].to_i, hash[:url_nodes][i])
             i+=1
         end 
     end
@@ -33,9 +40,6 @@ class Car
         self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}"} 
     end
     def self.cheapest 
-        cheap_car = self.all.sort_by {|car| car.price} 
-        puts "#{cheap_car[0].name} - $#{cheap_car[0].price}"
-
-        # binding.pry
+        self.all.sort_by {|car| car.price}[0] 
     end 
 end 
