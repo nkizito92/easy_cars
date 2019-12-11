@@ -8,11 +8,6 @@ class Scraper
         scraped_car_info[:price_nodes] = price
         scraped_car_info[:car_nodes] = name 
         scraped_car_info[:url_nodes] = url 
-        # i = 0
-        # while i != scraped_car_info[:car_nodes].length
-        #     Car.new(hash[:car_nodes][i], hash[:price_nodes][i].to_i, hash[:url_nodes][i])
-        #     i+=1
-        # end 
         scraped_car_info
     end 
 
@@ -29,9 +24,6 @@ class Scraper
         car_obj.engine = node[2].text 
         car_obj.drivetrain = node[3].text 
         car_obj.location = node.last.text 
-        #  car_obj(mileage, mpg, ext_color, int_color, fuel_type, engine, drivetrain, location)
-        # car_info = [mileage, mpg, ext_color, int_color, fuel_type, engine, drivetrain, location]
-        #   car_info.delete_at(3) if mpg == ""
          car_obj.mpg.delete if car_obj.mpg == ""
         car_obj      
     end 
@@ -39,5 +31,4 @@ class Scraper
     def self.site 
         "https://www.enterprisecarsales.com"
     end 
-
 end 
