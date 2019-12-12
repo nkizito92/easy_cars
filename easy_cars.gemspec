@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "vehicle_rankings/version"
+require "easy_cars/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "vehicle_rankings"
-  spec.version       = VehicleRankings::VERSION
+  spec.name          = "easy_cars"
+  spec.version       = EasyCars::VERSION
   spec.authors       = ["'Kizito Njoku'"]
   spec.email         = ["'nkizito57@gmail.com'"]
 
   spec.summary       = "Finding the best vehicle that is reliable and a great price"
-  spec.homepage      = "https://github.com/nkizito92/vehicle_rankings"
+  spec.homepage      = "https://github.com/nkizito92/easy_cars"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/nkizito92/vehicle_rankings"
-    spec.metadata["changelog_uri"] = "https://github.com/nkizito92/vehicle_rankings/commit/master"
+    spec.metadata["source_code_uri"] = "https://github.com/nkizito92/easy_cars"
+    spec.metadata["changelog_uri"] = "https://github.com/nkizito92/easy_cars/commit/master"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."

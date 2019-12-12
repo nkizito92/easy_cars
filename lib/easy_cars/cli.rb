@@ -1,5 +1,5 @@
 # CLI controller 
-class VehicleRankings::CLI 
+class EasyCars::CLI 
   def call 
     Car.create
     list_cars
@@ -58,6 +58,7 @@ class VehicleRankings::CLI
        puts "#{user_input.drivetrain}"
        puts "==================================================================="
        puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
+       puts "Type 'no' and press 'enter' to continue.\n"
       elsif input == "link"
        puts "Hold ctrl/command and click the link below."
        puts "==================================================================="
