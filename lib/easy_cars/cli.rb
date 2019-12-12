@@ -35,24 +35,12 @@ class EasyCars::CLI
         puts "==================================================================="
         puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
         puts "Type 'no' and press 'enter' to continue.\n"
-      elsif input == "yes"
-       Scraper.details(user_input)
-       puts "==================================================================="
-       puts "#{user_input.name} cost $#{user_input.price}"
-       puts "#{user_input.mileage}"
-       puts "#{user_input.mpg}" if user_input.mpg != ""
-       puts "#{user_input.ext_color}"
-       puts "#{user_input.int_color}"
-       puts "#{user_input.fuel_type}"
-       puts "#{user_input.engine}"
-       puts "#{user_input.drivetrain}"
-       puts "==================================================================="
-       puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
-       puts "Type 'no' and press 'enter' to continue.\n"
+      elsif input == "yes" 
+        selection = Scraper.details(user_input)
+        details(selection)
       elsif input == "cheap"
-        cheap_select = Car.find_index
-        user_input = Car.all[(cheap_select)]
         cheapest
+        user_input = Car.cheapest
       elsif input == "exit"
         # do nothing
       elsif input == "link"
@@ -66,13 +54,28 @@ class EasyCars::CLI
       end 
     end  
   end 
-  
+
   def cheapest 
     cheap = Car.cheapest 
         puts "********** #{cheap.name} - $#{cheap.price} ************"
         puts "==================================================================="
         puts "\nWould you like to see this cars details? Type 'yes' and press 'enter'."
         puts "Type 'no' and press 'enter' to continue."
+  end 
+
+  def details(car) 
+    puts "==================================================================="
+    puts "#{car.name} cost $#{car.price}"
+    puts "#{car.mileage}"
+    puts "#{car.mpg}" if car.mpg != ""
+    puts "#{car.ext_color}"
+    puts "#{car.int_color}"
+    puts "#{car.fuel_type}"
+    puts "#{car.engine}"
+    puts "#{car.drivetrain}"
+    puts "==================================================================="
+    puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
+    puts "Type 'no' and press 'enter' to continue.\n" 
   end 
   
   def close 
