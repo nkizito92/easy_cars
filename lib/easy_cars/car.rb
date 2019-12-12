@@ -38,8 +38,5 @@ class Car
     end
     def self.cheapest 
         self.all.sort_by {|car| car.price}[0] 
-    end 
-    def self.find_index
-        self.all.each {|car| car}.find_index(cheapest)
-    end 
+    end
 end 
