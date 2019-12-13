@@ -1,18 +1,10 @@
 class Car
     attr_accessor :name, :price, :url, :mileage, :mpg, :ext_color, :int_color, :fuel_type, :engine, :drivetrain, :location
     @@all = []
-    def initialize(name, price, url, mileage="nil", mpg="nil", ext_color="nil", int_color="nil", fuel_type="nil", engine="nil", drivetrain="nil", location="nil")
+    def initialize(name, price, url)
         @name = name
         @price = price
         @url = url
-        @mileage = mileage
-        @mpg = mpg
-        @ext_color = ext_color
-        @int_color = int_color
-        @fuel_type = fuel_type 
-        @engine = engine
-        @drivetrain = drivetrain
-        @location = location
         @@all << self
     end  
 
@@ -36,6 +28,7 @@ class Car
     def self.print_cars
         self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}"} 
     end
+    
     def self.cheapest 
         self.all.sort_by {|car| car.price}[0] 
     end

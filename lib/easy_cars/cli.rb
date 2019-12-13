@@ -21,22 +21,19 @@ class EasyCars::CLI
     input = nil
     while input != "exit"
       input = gets.strip.downcase 
-      if input == "list" || input == "no" #lvl 1
+      if input == "list" || input == "no" 
         list_cars
-      elsif input == "cars" #lvl 1
+      elsif input == "cars" 
         Car.print_cars
-      elsif input.to_i > 0 && input.to_i <= Car.all.length #lvl 1
+      elsif input.to_i > 0 && input.to_i <= Car.all.length 
         takes_input = input.to_i
         user_input = Car.all[(takes_input)-1]
-        # checks the input if valid 
         checker(user_input)
-      elsif input == "cheap" # lvl 1
+      elsif input == "cheap" 
         cheapest
         user_input = Car.cheapest
       elsif input == "exit"
         # do nothing
-      elsif input == "link" && user_input
-       link(user_input)
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 
@@ -62,8 +59,9 @@ class EasyCars::CLI
     puts "#{car.drivetrain}"
     puts "==================================================================="
     puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
-    puts "Type 'no' and press 'enter' to continue.\n" 
-    # if statment for link and ask for user input 
+    puts "Type any key and press 'enter' to continue.\n" 
+    links_input = gets.strip 
+      links_input == "link" ? link(car) : ""
   end 
 
   def link(car)
@@ -84,11 +82,10 @@ class EasyCars::CLI
 
   def yes_or_no_menu(something)
     puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
-    puts "Type 'no' and press 'enter' to continue.\n"
+    puts "Type any key and press 'enter' to return to main menu.\n"
     new_input = gets.strip.downcase
     if new_input == "yes"
-      selection = Scraper.details(something)
-      details(selection)
+      details(Scraper.details(something))
     else  
       puts "return to the main menu... " 
       sleep(2)
