@@ -21,34 +21,22 @@ class EasyCars::CLI
     input = nil
     while input != "exit"
       input = gets.strip.downcase 
-      if input == "list" || input == "no"
+      if input == "list" || input == "no" #lvl 1
         list_cars
-      elsif input == "cars" 
+      elsif input == "cars" #lvl 1
         Car.print_cars
-      elsif input.to_i > 0 && input.to_i <= Car.all.length
+      elsif input.to_i > 0 && input.to_i <= Car.all.length #lvl 1
         takes_input = input.to_i
         user_input = Car.all[(takes_input)-1]
         # checks the input if valid 
-        puts "==================================================================="
-        puts "You selected #{user_input.name}"
-        puts "\nIt cost $#{user_input.price}"
-        puts "==================================================================="
-        puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
-        puts "Type 'no' and press 'enter' to continue.\n"
-      elsif input == "yes" 
-        selection = Scraper.details(user_input)
-        details(selection)
-      elsif input == "cheap"
+        checker(user_input)
+      elsif input == "cheap" # lvl 1
         cheapest
         user_input = Car.cheapest
       elsif input == "exit"
         # do nothing
-      elsif input == "link"
-       puts "Hold ctrl/command and click the link below."
-       puts "==================================================================="
-       puts "#{Scraper.site+user_input.url}"
-       puts "==================================================================="
-       puts "\nType 'list' and press 'enter' to see a list of vehicles again."
+      elsif input == "link" && user_input
+       link(user_input)
       else 
         puts " #{input} is invalid please type 'list', 'exit', or a number between 1-#{Car.all.length}!"
       end 
@@ -59,8 +47,7 @@ class EasyCars::CLI
     cheap = Car.cheapest 
         puts "********** #{cheap.name} - $#{cheap.price} ************"
         puts "==================================================================="
-        puts "\nWould you like to see this cars details? Type 'yes' and press 'enter'."
-        puts "Type 'no' and press 'enter' to continue."
+        yes_or_no_menu(cheap)
   end 
 
   def details(car) 
@@ -76,6 +63,37 @@ class EasyCars::CLI
     puts "==================================================================="
     puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
     puts "Type 'no' and press 'enter' to continue.\n" 
+    # if statment for link and ask for user input 
+  end 
+
+  def link(car)
+       puts "Hold ctrl/command and click the link below."
+       puts "==================================================================="
+       puts "#{Scraper.site+car.url}"
+       puts "==================================================================="
+       puts "\nType 'list' and press 'enter' to see a list of vehicles again."
+  end 
+
+  def checker(car)
+    puts "==================================================================="
+    puts "You selected #{car.name}"
+    puts "\nIt cost $#{car.price}"
+    puts "==================================================================="
+    yes_or_no_menu(car)
+  end
+
+  def yes_or_no_menu(something)
+    puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
+    puts "Type 'no' and press 'enter' to continue.\n"
+    new_input = gets.strip.downcase
+    if new_input == "yes"
+      selection = Scraper.details(something)
+      details(selection)
+    else  
+      puts "return to the main menu... " 
+      sleep(2)
+      list_cars
+    end 
   end 
   
   def close 
