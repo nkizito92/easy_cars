@@ -21,10 +21,8 @@ class EasyCars::CLI
     input = nil
     while input != "exit"
       input = gets.strip.downcase 
-      if input == "list" || input == "no" 
+      if input == "list"
         list_cars
-      elsif input == "cars" 
-        Car.print_cars
       elsif input.to_i > 0 && input.to_i <= Car.all.length 
         takes_input = input.to_i
         user_input = Car.all[(takes_input)-1]
@@ -61,7 +59,7 @@ class EasyCars::CLI
     puts "Want to visit this vehicle's site? Type 'link' and press 'enter'." 
     puts "Type any key and press 'enter' to continue.\n" 
     links_input = gets.strip 
-      links_input == "link" ? link(car) : ""
+      links_input == "link" ? link(car) : main_menu
   end 
 
   def link(car)
@@ -84,15 +82,14 @@ class EasyCars::CLI
     puts "\nWould you like to view the details of this vehicle? Type 'yes' and press 'enter'."
     puts "Type any key and press 'enter' to return to main menu.\n"
     new_input = gets.strip.downcase
-    if new_input == "yes"
-      details(Scraper.details(something))
-    else  
-      puts "return to the main menu... " 
-      sleep(2)
-      list_cars
-    end 
+    new_input == "yes" ? details(Scraper.details(something)) : main_menu
   end 
   
+  def main_menu
+    puts "returning to the main menu... "
+    sleep(2)
+    list_cars 
+  end 
   def close 
     puts "closing search..."
     sleep(2)

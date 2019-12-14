@@ -24,10 +24,6 @@ class Car
     def self.print_all
         self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name} - $#{car.price}"} 
     end 
-
-    def self.print_cars
-        self.all.each.with_index(1) {|car, x| puts "#{x}. #{car.name}"} 
-    end
     
     def self.cheapest 
         self.all.sort_by {|car| car.price}[0] 
