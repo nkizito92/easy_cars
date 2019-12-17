@@ -1,10 +1,21 @@
 # CLI controller 
 class EasyCars::CLI 
   def call 
+    welcome
     Car.create
     list_cars
     start
     close
+  end 
+
+  def welcome 
+    puts "*******************************************"
+    puts "*                                         *"
+    puts "*          WELCOME TO EASY CARS!!         *"
+    puts "*                                         *"
+    puts "*******************************************"
+    puts "Press any key to continue"
+    gets.strip
   end 
   
   # setup for list of vehicles 
