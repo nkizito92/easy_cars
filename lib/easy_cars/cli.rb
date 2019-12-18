@@ -14,7 +14,7 @@ class EasyCars::CLI
     puts "*          WELCOME TO EASY CARS!!         *"
     puts "*                                         *"
     puts "*******************************************"
-    puts "Press any key to continue"
+    puts "Press 'enter' key to continue"
     gets.strip
   end 
   
